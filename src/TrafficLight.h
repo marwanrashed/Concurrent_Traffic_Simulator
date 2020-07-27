@@ -26,7 +26,7 @@ class MessageQueue
 public:
 
     void send (T &&msg);
-    T recieve ();
+    T receive ();
 
 private:
     std::deque<T> _queue;
@@ -69,8 +69,7 @@ private:
     // FP.4b : create a private member of type MessageQueue for messages of type TrafficLightPhase 
     // and use it within the infinite loop to push each new TrafficLightPhase into it by calling 
     // send in conjunction with move semantics.
-    TrafficLightPhase _currentPhase; 
-
+    MessageQueue<TrafficLightPhase> _phase_msgs;
     std::condition_variable _condition;
     std::mutex _mutex;
 };
